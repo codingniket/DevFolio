@@ -33,15 +33,15 @@ const LeftSideBar = () => {
             >
               <Image
                 src={item.imgURL}
-                height={24}
-                width={24}
+                height={20}
+                width={20}
                 alt="logo-leftSide-Bar"
                 className={`${isActive ? '' : 'invert-colors'}`}
               />
               <p
                 className={`${
                   isActive ? 'base-bold' : 'base-medium'
-                }max-lg:hidden`}
+                } max-lg:hidden`}
               >
                 {item.label}
               </p>
