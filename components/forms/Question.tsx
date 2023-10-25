@@ -20,12 +20,20 @@ import { QuestionSchema } from '@/lib/validation';
 import { Badge } from '../ui/badge';
 import Image from 'next/image';
 import { createQuestion } from '@/lib/actions/question.action';
+import { useRouter, usePathname } from 'next/navigation';
 
 const type: any = 'create';
 
-const Question = () => {
+interface Props {
+  mongoUserId: string;
+}
+
+const Question = ({ mongoUserId }: Props) => {
   const editorRef = useRef(null);
   const [isSubmitting, setSubmitting] = useState(false);
+  const router = useRouter();
+  const pathName = usePathname();
+
   // 1. Define your form.
   const form = useForm<z.infer<typeof QuestionSchema>>({
     resolver: zodResolver(QuestionSchema),
@@ -78,12 +86,19 @@ const Question = () => {
     try {
       // make async call to your API
       //  contain all form data
-      await createQuestion({});
+      await createQuestion({
+        title: values.title,
+        content: values.explanation,
+        tags: values.tags,
+        author: JSON.parse(mongoUserId),
+      });
+
+      // Navigate to home page
+      router.push('/');
     } catch (error) {
     } finally {
       setSubmitting(false);
     }
-    console.log(values);
   }
 
   return (
