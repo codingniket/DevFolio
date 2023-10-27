@@ -66,7 +66,7 @@ const RightSideBar = () => {
               _id={tag._id}
               name={tag.name}
               totalQuestions={tag.totalQuestions}
-              showCount
+              // showCount
             />
           ))}
         </div>
